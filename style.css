@@ -11,8 +11,7 @@ body{
 
 
 header{
-    background-color: #6350ddf5;
-
+    color: #666262a3;
 }
 
 button{
@@ -29,7 +28,6 @@ header .logo{
     text-align: center;
     font-style: italic;
     font-family: cursive;
-    color: whitesmoke;
 }
 
 
@@ -43,7 +41,9 @@ main .task-input{
     width: 300px;
     padding: 10px;
     border-radius: 10px;
-    border: 2px solid #6350ddf5;
+    border: 2px solid #666262a3;
+    color: #474646;
+    outline: none;
 }
 
 
@@ -53,8 +53,8 @@ main .task-input::placeholder{
 }
 
 
-main .submit-btn{
-    background-color: #6350ddf5;
+main .add-btn{
+    background-color: #8d54057c;
     color: whitesmoke;
     padding: 10px;
     border: none;
@@ -82,15 +82,31 @@ main .tasks-container{
 main .task{
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     column-gap: 15px;
     padding: 10px;
-    border: 2px solid;
+    border: 2px solid #666262a3; 
     border-radius: 10px;
-    max-width: 500px;
+    color: #474646;
+    width: 70%;
+    text-transform: capitalize;
+    margin-left: 5%;
 }
 
 
 main .update-btn,.delete-btn{
     padding: 5px;
+    color: whitesmoke;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+
+main .update-btn{
+    background-color: #8d54057c;
+}
+
+
+main .delete-btn{
+    background-color: #cd5151;
 }
