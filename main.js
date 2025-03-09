@@ -1,36 +1,73 @@
 const addBtn = document.querySelector(".add-btn");
+const resetBtn = document.querySelector(".reset-btn");
 const taskInput = document.querySelector(".task-input");
 const tasksContainer = document.querySelector(".tasks-container");
-const tasks = [];
 
-// Enable/Disable button based on input
-taskInput.addEventListener("input", () => {
-    taskInput.value.length === 0 ? addBtn.disabled = true : addBtn.disabled = false;
-});
+function saveToLocalstorage(){
+    localStorage.setItem("tasks",JSON.stringify(tasks));
+}
 
-addBtn.addEventListener("click", () => {
-    pushTask();
-});
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-function pushTask() {
-    if (taskInput.value.trim() === "") return; // Prevent empty tasks
-    tasks.push(taskInput.value.trim());
+
+
+function resetList(){
+    localStorage.clear();
+    tasksContainer.innerHTML = "";
+    tasks = [];
+    saveToLocalstorage();
+}
+
+function generateTask(){
+    let taskhtml = "";
+
+    for(let i = 0; i < tasks.length; i++){
+        taskhtml += `
+            <div class="task">
+                <p>${tasks[i]}</p>
+                <div class="mod-btns">
+                    <button class="update-btn" data-index="${i}">update</button>
+                    <button class="delete-btn" data-index="${i}">delete</button>
+                </div>
+            </div>
+        `
+    }
+    tasksContainer.innerHTML = taskhtml;
+}
+
+
+function pushTask(){
+    if(taskInput.value.length === 0)return;
+    const task = taskInput.value.trim();
+    tasks.push(task);
+    saveToLocalstorage();
     taskInput.value = "";
-    addBtn.disabled = true; // Disable button after adding a task
     generateTask();
 }
 
-function generateTask() {
-    let taskhtml = '';
-    tasks.forEach((task) => {
-        taskhtml += `
-            <div class="task">
-                <p>${task}</p>
-                <div class="task-btns">
-                    <button class="update-btn">update</button>
-                    <button class="delete-btn">delete</button>
-                </div>
-            </div>`;
-    });
-    tasksContainer.innerHTML = taskhtml; // Update the container correctly
+
+
+function deleteTask(taskIndex,event){
+    tasks.splice(taskIndex,1);
+    event.target.closest(".task").remove();
+    saveToLocalstorage();
+    generateTask();
 }
+
+
+
+
+document.addEventListener("click",(event)=>{
+    if(event.target.classList.contains("add-btn")){
+        pushTask();
+    }else if(event.target.classList.contains("reset-btn")){
+        resetList();
+    }else if(event.target.classList.contains("delete-btn")){
+        const taskIndex = event.target.dataset.index;
+        deleteTask(taskIndex,event);
+    }else if(event.target.classList.contains("update-btn")){
+        
+    }
+})
+
+generateTask();
