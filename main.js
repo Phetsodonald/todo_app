@@ -2,6 +2,7 @@ const addBtn = document.querySelector(".add-btn");
 const resetBtn = document.querySelector(".reset-btn");
 const taskInput = document.querySelector(".task-input");
 const tasksContainer = document.querySelector(".tasks-container");
+const update = document.querySelector(".update-task");
 
 function saveToLocalstorage(){
     localStorage.setItem("tasks",JSON.stringify(tasks));
@@ -20,13 +21,14 @@ function resetList(){
 
 function generateTask(){
     let taskhtml = "";
-
+    const date = new Date().toDateString()
+    console.log(date)
     for(let i = 0; i < tasks.length; i++){
         taskhtml += `
             <div class="task">
                 <p>${tasks[i]}</p>
-                <div class="mod-btns">
-                    <button class="update-btn" data-index="${i}">update</button>
+                <div>${date}</div>
+                <div class="mod-btn">
                     <button class="delete-btn" data-index="${i}">delete</button>
                 </div>
             </div>

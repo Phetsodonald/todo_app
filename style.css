@@ -104,7 +104,7 @@ main .update-btn,.delete-btn{
 }
 
 
-main .update-btn{
+main .update-btn,.submit-update{
     background-color: #8d54057c;
 }
 
@@ -112,3 +112,20 @@ main .update-btn{
 main .delete-btn,.reset-btn{
     background-color: #cd5151;
 }
+
+
+main .update-task{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: none;
+    align-items: center;
+    column-gap: 5px;
+
+}
+
+main textarea{
+    width: 500px;
+    border-radius: 5px;
+}
+
